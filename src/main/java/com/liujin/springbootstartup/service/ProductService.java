@@ -43,8 +43,8 @@ public class ProductService {
         }
     }
 
-    @Transactional
     private  boolean deleteByIdList(List<Long> idList) {
+
         Iterator i = idList.iterator();
         while (i.hasNext()) {
             Product pro = (Product)i.next();
@@ -60,6 +60,6 @@ public class ProductService {
 
     List<Product> getRecommendedProduct() {
 
-        return productRepository.findFirst5ByPrice();
+        return productRepository.findTop6ByOrderByPriceAsc();
     }
 }

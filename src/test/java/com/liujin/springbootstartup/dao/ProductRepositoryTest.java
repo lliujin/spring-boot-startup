@@ -5,6 +5,8 @@ import com.liujin.springbootstartup.domain.Product;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class ProductRepositoryTest extends SpringBootStartupApplicationTests {
@@ -28,5 +30,10 @@ public class ProductRepositoryTest extends SpringBootStartupApplicationTests {
 
         Product productFromDB = productRepository.findById(1L).get();
         assertEquals(productFromDB.getName(), "tt");
+    }
+
+    @Test
+    public void testFindTop10ByOrderByPriceAsc() {
+        List<Product> products = productRepository.findTop6ByOrderByPriceAsc();
     }
 }
