@@ -3,11 +3,11 @@ package com.liujin.springbootstartup.service;
 import com.liujin.springbootstartup.dao.ProductRepository;
 import com.liujin.springbootstartup.domain.Product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
-import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -44,22 +44,20 @@ public class ProductService {
     }
 
     private  boolean deleteByIdList(List<Long> idList) {
-
-        Iterator i = idList.iterator();
-        while (i.hasNext()) {
-            Product pro = (Product)i.next();
-            Long proId = pro.getId();
-            if(!(productRepository.existsById(proId))) {
-                return false;
-            } else {
-                productRepository.deleteByProductId(proId);
-            }
+        if(!(productRepository.findAll().containsAll(idList))) {
+            return false;
+        } else {
+            productRepository.deleteInBatchById(idList);
+            return true;
         }
-        return true;
     }
 
     List<Product> getRecommendedProduct() {
 
         return productRepository.findTop6ByOrderByPriceAsc();
+    }
+
+    public Page<Product> pagingQueryProduct(Pageable pageable) {
+        return productRepository.findAll(pageable);
     }
 }

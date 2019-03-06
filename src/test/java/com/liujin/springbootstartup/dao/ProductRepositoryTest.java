@@ -4,6 +4,10 @@ import com.liujin.springbootstartup.SpringBootStartupApplicationTests;
 import com.liujin.springbootstartup.domain.Product;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 
@@ -35,5 +39,12 @@ public class ProductRepositoryTest extends SpringBootStartupApplicationTests {
     @Test
     public void testFindTop10ByOrderByPriceAsc() {
         List<Product> products = productRepository.findTop6ByOrderByPriceAsc();
+    }
+
+    @Test
+    public void testFindAll() {
+        Sort sort = Sort.by("price");
+        PageRequest pageRequest = PageRequest.of(0, 5, sort);
+        Page<Product> productsByPage = productRepository.findAll(pageRequest);
     }
 }
