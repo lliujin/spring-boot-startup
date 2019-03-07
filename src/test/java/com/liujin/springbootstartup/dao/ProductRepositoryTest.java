@@ -20,10 +20,10 @@ public class ProductRepositoryTest extends SpringBootStartupApplicationTests {
 
     @Test
     public void testInsert() {
-        Product product = new Product(1L, "http://spring.io", "test", 2L);
+        Product product = new Product(188L, "http://spring.io", "test", 2L);
         productRepository.save(product);
 
-        Product productFromDB = productRepository.findById(1L).get();
+        Product productFromDB = productRepository.findById(188L).get();
         assertEquals(product, productFromDB);
     }
 

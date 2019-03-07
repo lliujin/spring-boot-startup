@@ -16,7 +16,7 @@ public class ProductService {
     @Autowired
     ProductRepository productRepository;
 
-    boolean createProduct(Product product) {
+    public boolean createProduct(Product product) {
 
         if(validateProduct(product)) {
             if(productRepository.existsById(product.getId())) {
@@ -43,7 +43,7 @@ public class ProductService {
         }
     }
 
-    private  boolean deleteByIdList(List<Long> idList) {
+    public boolean deleteByIdList(List<Long> idList) {
         if(!(productRepository.findAll().containsAll(idList))) {
             return false;
         } else {

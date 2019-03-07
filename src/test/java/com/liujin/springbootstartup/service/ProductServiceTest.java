@@ -1,5 +1,6 @@
 package com.liujin.springbootstartup.service;
 
+import com.liujin.springbootstartup.SpringBootStartupApplicationTests;
 import com.liujin.springbootstartup.dao.ProductRepository;
 import com.liujin.springbootstartup.domain.Product;
 import org.junit.Before;
@@ -10,11 +11,12 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.util.List;
+
 import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;
 
-@RunWith(MockitoJUnitRunner.class)
-public class ProductServiceTest {
+public class ProductServiceTest extends SpringBootStartupApplicationTests {
 
     @Mock
     private ProductRepository productRepository;
@@ -50,5 +52,13 @@ public class ProductServiceTest {
         when(productRepository.existsById(validProduct2.getId())).thenReturn(false);
         assertTrue(productService.createProduct(validProduct2));
         verify(productRepository, times(1)).save(validProduct2);
+    }
+
+    @Test
+    public void addProducts() {
+        //TODO move the test to dao
+        for(long i=1000L; i<1100L; i++) {
+           productService.createProduct(new Product(i,"http", "product", 100L));
+        }
     }
 }

@@ -45,11 +45,23 @@ public class ProductControllerTest extends SpringBootStartupApplicationTests {
     }
 
     @Test
-    public void getPagedProduct() throws Exception {
+    public void testGetPagedProduct() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/product/page")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .param("index", "1")
                 .param("size","5")
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    public void testAddProduct() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.post("/product/boolean")
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .param("id","155")
+                .param("image","http")
+                .param("name", "name")
+                .param("price", "100")
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(MockMvcResultHandlers.print());
     }
