@@ -7,7 +7,7 @@
   <script src="https://cdn.bootcss.com/vue/2.6.8/vue.common.dev.js"></script>
 </head>
 <body>
-<h1>Hello, FreeMarker!</h1>
+<h1>Vue Startup</h1>
 
 
 <div id="app">
@@ -16,30 +16,17 @@
   <label for="r1">change color</label>
   <input type="checkbox" v-model="use" id="r1">
   <div v-bind:class="{'class1': use}">
-    v-bind:class 指令
+    v-bind:class command
   </div>
   <div v-if="use">I'm here!</div>
 
   <p>{{name}}</p>
   <button v-on:click="reverse">reverse the string above</button>
+  <click-counter></click-counter>
 </div>
+
 </body>
-<script>
-  var app = new Vue({
-    el: '#app',
-    data: {
-      name: "zonghuixu",
-      age: 24,
-      use: false
-    },
-    methods: {
-      getInfo: function () {
-        return this.name + " is running!";
-      },
-      reverse: function () {
-        this.name = this.name.split('').reverse().join('')
-      }
-    }
-  });
-</script>
+
+<script src="/js/vue-component.js"></script>
+
 </html>
